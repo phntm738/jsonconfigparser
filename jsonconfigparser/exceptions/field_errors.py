@@ -1,59 +1,73 @@
-from jsonconfigparser.exceptions.base import JConfParserError
-from typing import Optional
+from .base import JConfParserError
 
 
 class FieldError(JConfParserError):
     """
     Base class for all Field-level exceptions
     """
-    def __init__(self, field_name: Optional[str] = None, msg: Optional[str] = None):
-        self.field_name = field_name
-        self.msg = msg
-        super().__init__()
+
+    pass
 
 
-class InvalidDefaultType(FieldError):
-    def __str__(self):
-        if self.field_name is not None:
-            return f"Invalid default type for field '{self.field_name}': {self.msg}"
-        return f"Invalid default type for field: {self.msg}"
+class InvalidDefaultTypeError(FieldError):
+    """
+    Field's default value's type is not allowed for that field
+    """
+
+    pass
 
 
-class InvalidParametersError(FieldError):
-    def __str__(self) -> str:
-        if self.field_name is not None:
-            return f"Invalid parameters for field '{self.field_name}': {self.msg}"
-        return f"Invalid parameters for field: {self.msg}"
+class InvalidDefaultError(FieldError):
+    """
+    Field's default value fails validation
+    """
+
+    pass
+
+
+class InvalidArgumentError(FieldError):
+    """
+    An argument has wrong type or invalid value
+    """
+
+    pass
 
 
 class NoValueError(FieldError):
-    def __str__(self) -> str:
-        if self.field_name is not None:
-            return f"No value was set for field '{self.field_name}'"
-        return "No value was set for required field"
+    """
+    Non-nullable field does not contain a value
+    """
+
+    pass
+
+
+class InvalidValueTypeError(FieldError):
+    """
+    Existing or new value's type is not allowed for that field
+    """
+
+    pass
 
 
 class InvalidValueError(FieldError):
-    def __str__(self) -> str:
-        if self.field_name is not None:
-            return f"Invalid value for field '{self.field_name}': {self.msg}"
-        return f"Invalid value for field: {self.msg}"
+    """
+    New value for field fails validation
+    """
+
+    pass
 
 
-class InvalidNameError(FieldError):
-    def __str__(self) -> str:
-        return f"Invalid name for field: {self.msg}"
+class NoNameError(FieldError):
+    """
+    Field does not have a name
+    """
+
+    pass
 
 
-class ValidationFailedError(FieldError):
-    def __str__(self) -> str:
-        if self.field_name is not None:
-            return f"Value for field '{self.field_name}' failed validation on validator '{self.msg}'"
-        return f"Value failed validation on validator '{self.msg}'"
+class InvalidNameTypeError(FieldError):
+    """
+    Existing or new name's type is not str
+    """
 
-
-class DefaultValueValidationFailedError(ValidationFailedError):
-    def __str(self) -> str:
-        if self.field_name is not None:
-            return f"Default value for field '{self.field_name}' failed validation on validator '{self.msg}'"
-        return f"Default value failed validation on validator '{self.msg}'"
+    pass

@@ -1,4 +1,6 @@
-from exceptions.base import *
-from exceptions.config_errors import *
-from exceptions.field_errors import *
-from exceptions.validator_errors import *
+from .base import *
+from .config_errors import *
+from .field_errors import *
+from .validator_errors import *
+
+# TODO: rework exceptions

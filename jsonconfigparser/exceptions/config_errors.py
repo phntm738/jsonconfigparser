@@ -1,10 +1,11 @@
-from jsonconfigparser.exceptions.base import JConfParserError
+from .base import JConfParserError
 
 
 class ConfigError(JConfParserError):
     """
     Base class for all JConfig-level exceptions
     """
+
     pass
 
 
